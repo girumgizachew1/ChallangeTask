@@ -151,7 +151,7 @@ function Splitter() {
                             <div className='flex justify-between' >
                                 
                             <div>
-                                    <label htmlFor="totalPerPerson" className="text-white text-base font-bold block mb-2">Tip Amount </label>
+                                    <label htmlFor="tipPerPerson" className="text-white text-base font-bold block mb-2">Tip Amount </label>
                                     <p  className="text-white text-sm font-normal block mb-2"> / Person</p>
 
                                 </div>
