@@ -1,130 +1,53 @@
-import { useState } from 'react'
-import './App.css'
-import { BsFillPersonFill } from "react-icons/bs";
+import { lazy, Suspense } from 'react';
+import './App.css';
+
+// Lazy load the Splitter component
+const Splitter = lazy(() => import('./components/Splitter'));
 
 function App() {
-  const [billAmount, setBillAmount] = useState<number>(0);
-  const [tipPercentage, setTipPercentage] = useState<number>(0);
-  const [numOfPeople, setNumOfPeople] = useState<number>(1);
-
-  const [isZero, setIsZero] = useState(false);
-
-  function calculateTip(): { tipPerPerson: string; totalPerPerson: string } {
-    const tipAmount = billAmount * (tipPercentage / 100);
-    const total = billAmount + tipAmount;
-    const tipPerPerson = tipAmount / numOfPeople;
-    const totalPerPerson = total / numOfPeople;
-    return {
-      tipPerPerson: tipPerPerson.toFixed(2),
-      totalPerPerson: totalPerPerson.toFixed(2),
-    };
-  }
-
-  const handleReset = (): void => {
-    setBillAmount(0);
-    setTipPercentage(0);
-    setNumOfPeople(1);
-  };
-
-  const handleBillChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setBillAmount(parseFloat(e.target.value));
-  };
-
-  const handleTipChange = (value: number | string): void => {
-    setTipPercentage(parseFloat(value.toString()));
-  };
-
-  const handlePeopleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const value = e.target.value;
-    if (value <= '0' ) {
-      setIsZero(true);
-      setNumOfPeople(parseFloat(e.target.value));
-    } else {
-      console.log(value)
-      setIsZero(false);
-      setNumOfPeople(parseFloat(e.target.value));
-    }
-  };
-
   return (
-    <div className="w-full h-screen bg-cyan-100 flex flex-col items-center justify-center">
-      <h1 className="text-2xl font-semibold text-gray-600 mb-4">SPIL <br /> TTER</h1>
-      <div className="bg-white mt-20 rounded-lg shadow-md p-4 space-x-10 mb-4 flex flex-col md:flex-row">
-        <div className="flex flex-col gap-4 justify-between py-5 space-y-10 px-5">
-          <div>
-            <label htmlFor="billAmount" className="text-gray-600 font-bold block text-gray-400 mb-2">Bill</label>
-            <div className="relative">
-              <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-300 text-xl">
-                $
-              </span>
-              <input
-                type="number"
-                id="billAmount"
-                value={billAmount}
-                onChange={handleBillChange}
-                className="w-full pl-10 pr-3 py-2 text-right rounded-md border-gray-300 text-teal-800 text-3xl leading-tight border border-gray-300"
-                style={{ appearance: "textfield" }}
-              />
+    <div>
+      {/* Use Suspense component with fallback to display a loading indicator */}
+      <Suspense fallback={<Loading/>}>
+        {/* Render the Splitter component */}
+        <Splitter />
+      </Suspense>
+    </div>
+  );
+}
 
-            </div>
-          </div>
-          <div>
-            <label htmlFor="tipPercentage" className="text-gray-600 font-bold block text-gray-400 mb-2">Select Tip %</label>
-            <div className="grid grid-cols-3 gap-2">
-              <button className={`w-40 py-2 px-3 border border-gray-300 rounded-md bg-teal-800 text-white  font-bold hover:bg-teal-300 hover:text-teal-800 text-2xl ${tipPercentage === 5 ? 'bg-teal-300 text-teal-800' : 'bg-teal-800 text-white'}`} onClick={() => handleTipChange(5)}>5%</button>
-              <button className={`w-40 py-2 px-3 border border-gray-300 rounded-md bg-teal-800 text-white font-bold hover:bg-teal-300 hover:text-teal-800 text-2xl ${tipPercentage === 10 ? 'bg-teal-300 text-teal-800' : 'bg-teal-800 text-white'}`} onClick={() => handleTipChange(10)}>10%</button>
-              <button className={`w-40 py-2 px-3 border border-gray-300 rounded-md bg-teal-800 text-white font-bold hover:bg-teal-300 hover:text-teal-800 text-2xl ${tipPercentage === 15 ? 'bg-teal-300 text-teal-800' : 'bg-teal-800 text-white'}`} onClick={() => handleTipChange(15)}>15%</button>
-              <button className={`w-40 py-2 px-3 border border-gray-300 rounded-md bg-teal-800 text-white font-bold hover:bg-teal-300 hover:text-teal-800 text-2xl ${tipPercentage === 20 ? 'bg-teal-300 text-teal-800' : 'bg-teal-800 text-white'}`} onClick={() => handleTipChange(20)}>20%</button>
-              <button className={`w-40 py-2 px-3 border border-gray-300 rounded-md bg-teal-800 text-white font-bold hover:bg-teal-300 hover:text-teal-800 text-2xl ${tipPercentage === 25 ? 'bg-teal-300 text-teal-800' : 'bg-teal-800 text-white'}`} onClick={() => handleTipChange(25)}>25%</button>
-              <input style={{ appearance: "textfield" }}
-                type="number" id="customTip" value={tipPercentage} onChange={(e) => handleTipChange(e.target.value)} placeholder='CUSTOM' className="w-40 text-right text-2xl text-teal-700 rounded-md  focus:border-teal-500 focus:ring-2 focus:ring-teal-200 focus:ring-opacity-50 py-2 px-3 leading-tight" />
-            </div>
-          </div>
-
-
-          <div>
-            <div className='flex justify-between' >
-              <label htmlFor="numOfPeople" className="text-gray-600 font-bold block text-gray-400 mb-2">Number of People</label>
-              <label htmlFor="numOfPeople" className="text-red-600 block text-gray-400 mb-2 text-xs">{isZero ? "Minimum Value is 1" : ''}</label>
-
-            </div>
-            <div className="relative">
-              <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-300 text-xl">
-                <BsFillPersonFill />
-              </span>
-              <input
-                type="number"
-                pattern="\d*"
-                id="billAmount"
-                value={numOfPeople} onChange={handlePeopleChange}
-                className={`w-full pl-10 pr-3 py-2 text-right rounded-md border border-gray-300 text-teal-800 text-3xl leading-tight ${isZero ?"":""} `}
-                style={{ appearance: "textfield" }}
-              />
-
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-white rounded-xl shadow-md p-10 m-6  bg-teal-900 flex flex-col justify-between w-[45vh] ">
-          <div className="flex flex-col gap-4">
-            <div className='flex justify-between' >
-              <label htmlFor="tipPerPerson" className="text-white text-sm  font-normal block mb-2">Tip Amount <br />   / Person</label>
-              <p id="tipPerPerson" className="text-gray-700 font-bold text-3xl text-teal-300">$ { !isZero  ? calculateTip().tipPerPerson : "0.00" }</p>
-            </div>
-            <div className='flex justify-between' >
-              <label htmlFor="totalPerPerson" className="text-white text-sm font-normal block mb-2">Total <br /> / Person</label>
-              <p id="totalPerPerson" className="text-gray-700 font-bold text-3xl text-teal-300">$ { !isZero ? calculateTip().totalPerPerson : "0.00" }</p>
-            </div>
-          </div>
-          <div className='w-full' >
-            <button onClick={handleReset} className="w-full bg-teal-700 hover:bg-teal-300 text-teal-800 font-bold py-2 px-4 rounded-lg">
-              Reset
-            </button>
-          </div>
-        </div>
+// Define the Loading component as a fallback to display a loading indicator
+function Loading(){
+  return(
+    <div>
+      {/* Display a spinning circle and "Loading..." text */}
+      <div className="flex items-center justify-center h-screen">
+        <svg
+          className="animate-spin -ml-1 mr-3 h-10 w-10 text-teal-500"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            className="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            strokeWidth="4"
+          ></circle>
+          <path
+            className="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647zm12-5.291a7.962 7.962 0 01-2 5.291l3 2.647A8.01 8.01 0 0024 12h-4zm-2-5.291V4.062A7.962 7.962 0 0116 12h4c0-3.042-1.135-5.824-3-7.938z"
+          ></path>
+        </svg>
+        <span className="text-teal-500 text-xl font-semibold">
+          Loading...
+        </span>
       </div>
-
     </div>
   )
 }
-export default App
+
+export default App;
