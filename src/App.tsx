@@ -12,8 +12,8 @@ function App() {
         <title>Bill Splitter App</title>
         <meta name="description" content="A bill splitter app that calculates the total tip and amount per person." />
         <meta name="keywords" content="bill splitter, tip calculator, split bill, calculate tip, group expenses" />
-        <meta name="author" content="Your Name Here" />
-        <link rel="icon" type="image/png" href="/favicon.png" sizes="16x16" />
+        <meta name="author" content="Girum Gizachew" />
+        <link rel="icon" type="image/png" href="/vite.svg" sizes="16x16" />
       </Helmet>
       {/* Use Suspense component with fallback to display a loading indicator */}
       <Suspense fallback={<Loading/>}>

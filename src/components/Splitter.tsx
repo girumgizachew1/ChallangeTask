@@ -86,7 +86,7 @@ function Splitter() {
                                     placeholder='0'
                                     min='0'
                                     onChange={handleBillChange}
-                                    className="w-full pl-10 pr-3 py-2 border border-gray-200 md:border-none outline-none text-right rounded-md text-teal-800 text-3xl leading-tight focus:border-2 focus:border-teal-300"
+                                    className="w-full pl-10 pr-3 py-2 border border-gray-200  outline-none text-right rounded-md text-teal-800 text-3xl leading-tight focus:border-2 focus:border-teal-300"
                                     style={{ appearance: "textfield" }}
                                 />
 
@@ -97,11 +97,11 @@ function Splitter() {
                         <div className='mx-3' >
                             <label htmlFor="tipPercentage customTip" className="text-gray-600 font-bold block text-gray-400 mb-2">Select Tip %</label>
                             <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 text-lg md:text-2xl">
-                                <button className={`w-32 py-2 px-3 border border-gray-300 rounded-md bg-teal-800 text-white  font-bold hover:bg-teal-300 hover:text-teal-800  ${tipPercentage === 5 ? 'bg-teal-300 text-teal-800' : 'bg-teal-800 text-white'}`} onClick={() => handleTipChange(5)}>5%</button>
-                                <button className={`w-32 py-2 px-3 border border-gray-300 rounded-md bg-teal-800 text-white font-bold hover:bg-teal-300 hover:text-teal-800  ${tipPercentage === 10 ? 'bg-teal-300 text-teal-800' : 'bg-teal-800 text-white'}`} onClick={() => handleTipChange(10)}>10%</button>
-                                <button className={`w-32 py-2 px-3 border border-gray-300 rounded-md bg-teal-800 text-white font-bold hover:bg-teal-300 hover:text-teal-800  ${tipPercentage === 15 ? 'bg-teal-300 text-teal-800' : 'bg-teal-800 text-white'}`} onClick={() => handleTipChange(15)}>15%</button>
-                                <button className={`w-32 py-2 px-3 border border-gray-300 rounded-md bg-teal-800 text-white font-bold hover:bg-teal-300 hover:text-teal-800  ${tipPercentage === 20 ? 'bg-teal-300 text-teal-800' : 'bg-teal-800 text-white'}`} onClick={() => handleTipChange(20)}>20%</button>
-                                <button className={`w-32 py-2 px-3 border border-gray-300 rounded-md bg-teal-800 text-white font-bold hover:bg-teal-300 hover:text-teal-800  ${tipPercentage === 25 ? 'bg-teal-300 text-teal-800' : 'bg-teal-800 text-white'}`} onClick={() => handleTipChange(25)}>25%</button>
+                                <button className={`w-32 md:w-40 py-2 px-3 border border-gray-300 rounded-md bg-teal-800 text-white  font-bold hover:bg-teal-300 hover:text-teal-800  ${tipPercentage === 5 ? 'bg-teal-300 text-teal-800' : 'bg-teal-800 text-white'}`} onClick={() => handleTipChange(5)}>5%</button>
+                                <button className={`w-32 md:w-40 py-2 px-3 border border-gray-300 rounded-md bg-teal-800 text-white font-bold hover:bg-teal-300 hover:text-teal-800  ${tipPercentage === 10 ? 'bg-teal-300 text-teal-800' : 'bg-teal-800 text-white'}`} onClick={() => handleTipChange(10)}>10%</button>
+                                <button className={`w-32 md:w-40 py-2 px-3 border border-gray-300 rounded-md bg-teal-800 text-white font-bold hover:bg-teal-300 hover:text-teal-800  ${tipPercentage === 15 ? 'bg-teal-300 text-teal-800' : 'bg-teal-800 text-white'}`} onClick={() => handleTipChange(15)}>15%</button>
+                                <button className={`w-32 md:w-40 py-2 px-3 border border-gray-300 rounded-md bg-teal-800 text-white font-bold hover:bg-teal-300 hover:text-teal-800  ${tipPercentage === 20 ? 'bg-teal-300 text-teal-800' : 'bg-teal-800 text-white'}`} onClick={() => handleTipChange(20)}>20%</button>
+                                <button className={`w-32 md:w-40 py-2 px-3 border border-gray-300 rounded-md bg-teal-800 text-white font-bold hover:bg-teal-300 hover:text-teal-800  ${tipPercentage === 25 ? 'bg-teal-300 text-teal-800' : 'bg-teal-800 text-white'}`} onClick={() => handleTipChange(25)}>25%</button>
                                 <input style={{ appearance: "textfield" }}
                                     type="number"
                                     id="customTip"
@@ -116,7 +116,7 @@ function Splitter() {
                                         handleTipChange(value);
                                     }}
                                     placeholder='CUSTOM'
-                                    className="w-32 text-right  text-teal-700 rounded-md outline-none focus:border-2 focus:border-teal-300 py-2 px-3 leading-tight" />
+                                    className="w-32 md:w-40 text-right  text-teal-700 rounded-md outline-none focus:border-2 focus:border-teal-300 py-2 px-3 leading-tight" />
                             </div>
                         </div>
 
@@ -137,7 +137,7 @@ function Splitter() {
                                     id="numOfPeople"
                                     value={numOfPeople}
                                     onChange={handlePeopleChange}
-                                    className={`w-full pl-10 pr-3 py-2 text-right rounded-md  text-teal-800 text-3xl leading-tight outline-none border border-gray-200 md:border-none ${isZero ? "focus:border-2 focus:border-red-300 border border-red-400 " : "focus:border-2 focus:border-teal-300"} `}
+                                    className={`w-full pl-10 pr-3 py-2 text-right rounded-md  text-teal-800 text-3xl leading-tight outline-none border border-gray-200 ${isZero ? "focus:border-2 focus:border-red-300 border border-red-400 " : "focus:border-2 focus:border-teal-300"} `}
                                     style={{ appearance: "textfield" }}
                                 />
 
@@ -148,11 +148,20 @@ function Splitter() {
                     <div className="bg-white rounded-xl shadow-md p-10  bg-teal-800 flex flex-col justify-between w-[42vh] md:w-[45vh] " style={{ backgroundColor: "#008080" }} >
                         <div className="flex flex-col gap-6">
                             <div className='flex justify-between' >
-                                <label htmlFor="tipPerPerson" className="text-white text-sm  font-normal block mb-2">Tip Amount <br />   / Person</label>
+                                
+                            <div>
+                                    <label htmlFor="totalPerPerson" className="text-white text-base font-bold block mb-2">Tip Amount </label>
+                                    <label htmlFor="totalPerPerson" className="text-gray-200 text-sm font-normal block mb-2"> / Person</label>
+
+                                </div>
                                 <p id="tipPerPerson" className="font-bold text-xl md:text-3xl text-teal-100">$ {!isZero ? tipInfo.tipPerPerson : "0.00"}</p>
                             </div>
                             <div className='flex justify-between' >
-                                <label htmlFor="totalPerPerson" className="text-white text-sm font-normal block mb-2">Total <br /> / Person</label>
+                                <div>
+                                    <label htmlFor="totalPerPerson" className="text-white text-base font-bold block mb-2">Total </label>
+                                    <label htmlFor="totalPerPerson" className="text-gray-200 text-sm font-normal block mb-2"> / Person</label>
+
+                                </div>
                                 <p id="totalPerPerson" className="font-bold text-xl md:text-3xl text-teal-100">$ {!isZero ? tipInfo.totalPerPerson : "0.00"}</p>
                             </div>
                         </div>
