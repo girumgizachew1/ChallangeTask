@@ -7,12 +7,13 @@ function App() {
   const [tipPercentage, setTipPercentage] = useState<number>(0);
   const [numOfPeople, setNumOfPeople] = useState<number>(1);
 
+  const [isZero, setIsZero] = useState(false);
+
   function calculateTip(): { tipPerPerson: string; totalPerPerson: string } {
     const tipAmount = billAmount * (tipPercentage / 100);
     const total = billAmount + tipAmount;
     const tipPerPerson = tipAmount / numOfPeople;
     const totalPerPerson = total / numOfPeople;
-
     return {
       tipPerPerson: tipPerPerson.toFixed(2),
       totalPerPerson: totalPerPerson.toFixed(2),
@@ -34,7 +35,15 @@ function App() {
   };
 
   const handlePeopleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setNumOfPeople(parseFloat(e.target.value));
+    const value = e.target.value;
+    if (value <= '0' ) {
+      setIsZero(true);
+      setNumOfPeople(parseFloat(e.target.value));
+    } else {
+      console.log(value)
+      setIsZero(false);
+      setNumOfPeople(parseFloat(e.target.value));
+    }
   };
 
   return (
@@ -74,16 +83,21 @@ function App() {
 
 
           <div>
-            <label htmlFor="numOfPeople" className="text-gray-600 font-bold block text-gray-400 mb-2">Number of People</label>
+            <div className='flex justify-between' >
+              <label htmlFor="numOfPeople" className="text-gray-600 font-bold block text-gray-400 mb-2">Number of People</label>
+              <label htmlFor="numOfPeople" className="text-red-600 block text-gray-400 mb-2 text-xs">{isZero ? "Minimum Value is 1" : ''}</label>
+
+            </div>
             <div className="relative">
               <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-300 text-xl">
-                <BsFillPersonFill/>
+                <BsFillPersonFill />
               </span>
               <input
                 type="number"
+                pattern="\d*"
                 id="billAmount"
                 value={numOfPeople} onChange={handlePeopleChange}
-                className="w-full pl-10 pr-3 py-2 text-right rounded-md border border-gray-300 text-teal-800 text-3xl leading-tight"
+                className={`w-full pl-10 pr-3 py-2 text-right rounded-md border border-gray-300 text-teal-800 text-3xl leading-tight ${isZero ?"":""} `}
                 style={{ appearance: "textfield" }}
               />
 
@@ -95,11 +109,11 @@ function App() {
           <div className="flex flex-col gap-4">
             <div className='flex justify-between' >
               <label htmlFor="tipPerPerson" className="text-white text-sm  font-normal block mb-2">Tip Amount <br />   / Person</label>
-              <p id="tipPerPerson" className="text-gray-700 font-bold text-3xl text-teal-300">$ {calculateTip().tipPerPerson}</p>
+              <p id="tipPerPerson" className="text-gray-700 font-bold text-3xl text-teal-300">$ { !isZero  ? calculateTip().tipPerPerson : "0.00" }</p>
             </div>
             <div className='flex justify-between' >
               <label htmlFor="totalPerPerson" className="text-white text-sm font-normal block mb-2">Total <br /> / Person</label>
-              <p id="totalPerPerson" className="text-gray-700 font-bold text-3xl text-teal-300">$ {calculateTip().totalPerPerson}</p>
+              <p id="totalPerPerson" className="text-gray-700 font-bold text-3xl text-teal-300">$ { !isZero ? calculateTip().totalPerPerson : "0.00" }</p>
             </div>
           </div>
           <div className='w-full' >
