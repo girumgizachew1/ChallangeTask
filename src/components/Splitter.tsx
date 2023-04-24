@@ -44,15 +44,17 @@ function Splitter() {
     // Update numOfPeople state variable when input value changes
     const handlePeopleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
         const value = e.target.value;
+        const numValue = parseFloat(value);
         // If the input value is non-positive, set isZero to true and update numOfPeople state variable
-        if (value <= '0') {
-            setIsZero(true);
-            setNumOfPeople(parseFloat(e.target.value));
+        if (numValue <= 0) {
+          setIsZero(true);
+          setNumOfPeople(numValue);
         } else {
-            setIsZero(false);
-            setNumOfPeople(parseFloat(e.target.value));
+          setIsZero(false);
+          setNumOfPeople(numValue);
         }
-    };
+      };
+      
 
 
 
@@ -95,7 +97,7 @@ function Splitter() {
                         {/* Select Tips input field */}
 
                         <div className='mx-3' >
-                            <label htmlFor="tipPercentage customTip" className="text-gray-600 font-bold block text-gray-400 mb-2">Select Tip %</label>
+                            <label htmlFor="customTip" className="text-gray-600 font-bold block text-gray-400 mb-2">Select Tip %</label>
                             <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 text-lg md:text-2xl">
                                 <button className={`w-32 md:w-40 py-2 px-3 border border-gray-300 rounded-md bg-teal-800 text-white  font-bold hover:bg-teal-300 hover:text-teal-800  ${tipPercentage === 5 ? 'bg-teal-300 text-teal-800' : 'bg-teal-800 text-white'}`} onClick={() => handleTipChange(5)}>5%</button>
                                 <button className={`w-32 md:w-40 py-2 px-3 border border-gray-300 rounded-md bg-teal-800 text-white font-bold hover:bg-teal-300 hover:text-teal-800  ${tipPercentage === 10 ? 'bg-teal-300 text-teal-800' : 'bg-teal-800 text-white'}`} onClick={() => handleTipChange(10)}>10%</button>
@@ -133,7 +135,6 @@ function Splitter() {
                                 </span>
                                 <input
                                     type="number"
-                                    pattern="\d*"
                                     id="numOfPeople"
                                     value={numOfPeople}
                                     onChange={handlePeopleChange}
@@ -151,7 +152,7 @@ function Splitter() {
                                 
                             <div>
                                     <label htmlFor="totalPerPerson" className="text-white text-base font-bold block mb-2">Tip Amount </label>
-                                    <label htmlFor="totalPerPerson" className="text-white text-sm font-normal block mb-2"> / Person</label>
+                                    <p  className="text-white text-sm font-normal block mb-2"> / Person</p>
 
                                 </div>
                                 <p id="tipPerPerson" className="font-bold text-xl md:text-3xl text-teal-100">$ {!isZero ? tipInfo.tipPerPerson : "0.00"}</p>
@@ -159,7 +160,7 @@ function Splitter() {
                             <div className='flex justify-between' >
                                 <div>
                                     <label htmlFor="totalPerPerson" className="text-white text-base font-bold block mb-2">Total </label>
-                                    <label htmlFor="totalPerPerson" className="text-white text-sm font-normal block mb-2"> / Person</label>
+                                    <p className="text-white text-sm font-normal block mb-2"> / Person</p>
 
                                 </div>
                                 <p id="totalPerPerson" className="font-bold text-xl md:text-3xl text-teal-100">$ {!isZero ? tipInfo.totalPerPerson : "0.00"}</p>

@@ -7,19 +7,28 @@ const Splitter = lazy(() => import('./components/Splitter'));
 function App() {
   return (
     <div>
-            {/* Use Helmet component to add meta data */}
-       <Helmet>
+      {/* Use Helmet component to add meta data */}
+      <Helmet>
         <title>Bill Splitter App</title>
         <meta name="description" content="A bill splitter app that calculates the total tip and amount per person." />
         <meta name="keywords" content="bill splitter, tip calculator, split bill, calculate tip, group expenses" />
         <meta name="author" content="Girum Gizachew" />
         <link rel="icon" type="image/png" href="/vite.svg" sizes="16x16" />
       </Helmet>
-      {/* Use Suspense component with fallback to display a loading indicator */}
-      <Suspense fallback={<Loading/>}>
-        {/* Render the Splitter component */}
-        <Splitter />
-      </Suspense>
+      {/* Use landmarks to contain the page content */}
+      <header>
+        {/* Render the header content */}
+      </header>
+      <main>
+        {/* Use Suspense component with fallback to display a loading indicator */}
+        <Suspense fallback={<Loading/>}>
+          {/* Render the Splitter component */}
+          <Splitter />
+        </Suspense>
+      </main>
+      <footer>
+        {/* Render the footer content */}
+      </footer>
     </div>
   );
 }
