@@ -1,12 +1,20 @@
 import { lazy, Suspense } from 'react';
 import './App.css';
-
+import { Helmet } from 'react-helmet';
 // Lazy load the Splitter component
 const Splitter = lazy(() => import('./components/Splitter'));
 
 function App() {
   return (
     <div>
+            {/* Use Helmet component to add meta data */}
+       <Helmet>
+        <title>Bill Splitter App</title>
+        <meta name="description" content="A bill splitter app that calculates the total tip and amount per person." />
+        <meta name="keywords" content="bill splitter, tip calculator, split bill, calculate tip, group expenses" />
+        <meta name="author" content="Your Name Here" />
+        <link rel="icon" type="image/png" href="/favicon.png" sizes="16x16" />
+      </Helmet>
       {/* Use Suspense component with fallback to display a loading indicator */}
       <Suspense fallback={<Loading/>}>
         {/* Render the Splitter component */}
