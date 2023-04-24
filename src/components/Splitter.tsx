@@ -126,7 +126,7 @@ function Splitter() {
                         <div>
                             <div className='flex justify-between' >
                                 <label htmlFor="numOfPeople" className="text-gray-600 font-bold block text-gray-400 mb-2">Number of People</label>
-                                <label htmlFor="numOfPeople" className="text-red-600 block text-gray-400 mb-2 text-xs">{isZero ? "Minimum Value is 1" : ''}</label>
+                                <p  className="text-red-600 block text-gray-400 mb-2 text-xs">{isZero ? "Minimum Value is 1" : ''}</p>
 
                             </div>
                             <div className="relative">
@@ -151,7 +151,7 @@ function Splitter() {
                             <div className='flex justify-between' >
                                 
                             <div>
-                                    <p htmlFor="tipPerPerson" className="text-white text-base font-bold block mb-2">Tip Amount </p>
+                                    <p  className="text-white text-base font-bold block mb-2">Tip Amount </p>
                                     <p  className="text-white text-sm font-normal block mb-2"> / Person</p>
 
                                 </div>
