@@ -15,10 +15,9 @@ function App() {
         <meta name="author" content="Girum Gizachew" />
         <link rel="icon" type="image/png" href="/vite.svg" sizes="16x16" />
       </Helmet>
+    
       {/* Use landmarks to contain the page content */}
-      <header>
-        {/* Render the header content */}
-      </header>
+      
       <main>
         {/* Use Suspense component with fallback to display a loading indicator */}
         <Suspense fallback={<Loading/>}>
@@ -26,9 +25,6 @@ function App() {
           <Splitter />
         </Suspense>
       </main>
-      <footer>
-        {/* Render the footer content */}
-      </footer>
     </div>
   );
 }
